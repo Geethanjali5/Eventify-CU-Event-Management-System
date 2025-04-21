@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-5">{{ event.event_name }}</h1>
+        <p class="text-muted">Discover more about this event and book your ticket below!</p>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Event Details</h4>
+            <p><strong>Description:</strong> {{ event.description }}</p>
+            <p><strong>Event Type:</strong> {{ event.event_type }}</p>
+            <p><strong>Date:</strong> {{ event.event_time }}</p>
+            <p><strong>Venue:</strong> {{ event.venue }}</p>
+            <p><strong>Campus:</strong> {{ event.campus }}</p>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <h4 class="card-title">Available Tickets</h4>
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Ticket ID</th>
+                        <th>Type</th>
+                        <th>Fee</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.ticket_id }}</td>
+                        <td>{{ ticket.ticket_type }}</td>
+                        <td>${{ ticket.fee }}</td>
+                        <td>
+                            <form action="/book_ticket/{{ event.event_id }}" method="POST" class="d-inline">
+                                <input type="hidden" name="ticket_type" value="{{ ticket.ticket_type }}">
+                                <div class="input-group">
+                                    <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                                    <button type="submit" class="btn btn-success">Book</button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

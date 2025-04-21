@@ -1,0 +1,21 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    font-family: 'Arial', sans-serif;
+}
+
+footer {
+    font-size: 14px;
+    background: #343a40;
+    color: #ffffff;
+}

@@ -1,0 +1,44 @@
+services:
+
+  web-server:
+    build: .
+    command: "python3 app.py"
+    volumes:
+      - ./server:/workspace
+    ports:
+      - 3001:3001
+
+  postgresdb:
+    # official postgres base image
+    image: postgres
+    # restart policy set to always to restart container in case of server reboot
+    restart: always
+    # map host port 5432 to container port 5432
+    ports:
+      - 5432:5432
+    # environment variables (some of which are mandatory) used to run the postgres image
+    environment:
+      POSTGRES_PASSWORD: root
+      # Need to specify otherwise psql in the container shell will try to run as root
+      PGUSER: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    # makes sql scripts available within container
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+    # standard postgres healthcheck
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgresdb
+
+        
