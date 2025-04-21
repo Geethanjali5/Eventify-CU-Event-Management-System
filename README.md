@@ -1,4 +1,4 @@
-# COMS4111- Intro To Databases Project 
+# COMS4111 - CU Eventify: Event Management System 
 
    ## PostgreSQL Account
 
@@ -10,7 +10,6 @@
 ## Web Application URL
 
 - **URL:** [http://104.196.31.191:8111/events]
-- **Github Repo:** [https://github.com/athmihir/COMS4111-Project/tree/main]
 ---
 
 ---
